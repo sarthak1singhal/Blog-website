@@ -82,10 +82,7 @@ const SigninComponent = () => {
             SIGN IN
           </button>
 
-          <div className="signin_form__signin-options">
-            <p>Or sign in with</p>
-            <GoogleLoginButton />
-          </div>
+           
           <div className="signin_form__forgot-password">
             <Link href="/auth/password/forgot">
               <a className="signin_form__forgot-password--link">

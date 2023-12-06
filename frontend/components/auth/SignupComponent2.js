@@ -112,10 +112,10 @@ const SignupComponent2 = () => {
             SIGN UP
           </button>
 
-          <div className="signup-form__signin-options">
+          {/* <div className="signup-form__signin-options">
             <p>Or sign in with</p>
             <GoogleLoginButton />
-          </div>
+          </div> */}
         </form>
 
         <div className="notify-message">

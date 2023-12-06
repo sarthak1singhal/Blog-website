@@ -32,6 +32,7 @@ exports.preSignup = (req, res) => {
       }
     );
 
+    console.log(`${process.env.CLIENT_URL}/auth/account/activate/${token}`)
     // email
     const emailData = {
       from: process.env.EMAIL_FROM,
@@ -46,11 +47,11 @@ exports.preSignup = (req, res) => {
           `,
     };
 
-    sgMail.send(emailData).then((sent) => {
-      return res.json({
-        message: `Email has been sent to ${email}. Follow the instructions to activate your account.`,
-      });
+    
+    return res.json({
+      message: `Check Backend Logs for the authentication url or visit ${process.env.CLIENT_URL}/auth/account/activate/${token}`,
     });
+    
   });
 };
 

@@ -38,6 +38,6 @@ router.put(
 );
 
 // Google-Login
-router.post("/google-login", googleLogin);
+// router.post("/google-login", googleLogin);
 
 module.exports = router;

@@ -8,6 +8,7 @@ const GoogleLoginButton = () => {
     const { tokenId } = response;
     const login = await loginWithGoogle({ tokenId });
 
+    console.log(login)
     if (login.error) {
       console.log(login.error);
     } else {
