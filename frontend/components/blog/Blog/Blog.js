@@ -29,11 +29,11 @@ const Blog = ({ blog, categories }) => {
             </p>
           </section>
           <section className="blog__categories-tags">
-            {blog.categories.map((category) => (
+            {/* {blog.categories.map((category) => (
               <Link key={category._id} href={`/categories/${category.slug}`}>
                 <a className="blog__category">{category.name}</a>
               </Link>
-            ))}
+            ))} */}
 
             {blog.tags.map((tag) => (
               <Link key={tag._id} href={`/tags/${tag.slug}`}>
@@ -48,9 +48,9 @@ const Blog = ({ blog, categories }) => {
         </div>
         <div className="blog__sidebar">
           <div className="blog__sidebar-categories">
-            {categories.map((category) => (
-              <Link key={category._id} href={`/categories/${category.slug}`}>
-                <a className="blog__sidebar-category">{category.name}</a>
+            {categories.map((tag) => (
+              <Link key={tag._id} href={`/categories/${tag.slug}`}>
+                <a className="blog__sidebar-category">{tag.name}</a>
               </Link>
             ))}
           </div>

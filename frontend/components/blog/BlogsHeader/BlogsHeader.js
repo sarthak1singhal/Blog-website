@@ -6,7 +6,7 @@ const BlogsHeader = ({ categories, tags }) => {
       <h1 className="blogs-header__title">Programming blogs and tutorials</h1>
 
       <div className="blogs-header__categories-tags">
-        {categories.map((category) => (
+        {/* {categories.map((category) => (
           <Link key={category._id} href={`/categories/${category.slug}`}>
             <a className="blogs-header__category">
               <img
@@ -17,7 +17,7 @@ const BlogsHeader = ({ categories, tags }) => {
               {category.name}
             </a>
           </Link>
-        ))}
+        ))} */}
 
         {tags.map((tag) => (
           <Link key={tag._id} href={`/tags/${tag.slug}`}>

@@ -20,11 +20,11 @@ const BlogCard = ({ blog }) => (
       | Published {moment(blog.updatedAt).fromNow()}
     </p>
     <div className="blog-card__categories-tags">
-      {blog.categories.map((category) => (
+      {/* {blog.categories.map((category) => (
         <Link key={category._id} href={`/categories/${category.slug}`}>
           <a className="blog-card__category">{category.name}</a>
         </Link>
-      ))}
+      ))} */}
 
       {blog.tags.map((tag) => (
         <Link key={tag._id} href={`/tags/${tag.slug}`}>
