@@ -92,9 +92,14 @@ exports.create = (req, res) => {
 
 // list, listAllBlogsCategoriesTags, read, remove, update
 exports.list = (req, res) => {
+  let limit = req.body.limit ? parseInt(req.body.limit) : 10;
+  let skip = req.body.skip ? parseInt(req.body.skip) : 0;
+
   CaseStudies.find({})
     .populate("categories", "_id name slug")
     .populate("postedBy", "_id name username")
+    .skip(skip)
+    .limit(limit)
     .select(
       "_id title slug excerpt categories website postedBy createdAt updatedAt"
     )
