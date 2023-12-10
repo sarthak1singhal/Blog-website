@@ -28,6 +28,9 @@ const blogSchema = new mongoose.Schema(
     mtitle: {
       type: String,
     },
+    imageUrl: {
+      type: String,
+    },
     mdesc: {
       type: String,
     },
@@ -35,7 +38,7 @@ const blogSchema = new mongoose.Schema(
       data: Buffer,
       contentType: String,
     },
-    categories: [{ type: ObjectId, ref: "Category", required: true }],
+    // categories: [{ type: ObjectId, ref: "Category", required: true }],
     tags: [{ type: ObjectId, ref: "Tag", required: true }],
     favoritesCount: {type: Number, default: 0},
     postedBy: {

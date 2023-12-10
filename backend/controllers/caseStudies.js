@@ -19,7 +19,7 @@ exports.create = (req, res) => {
       });
     }
 
-    const { title, body, categories, website } = fields;
+    const { title, body, categories, website, imageUrl } = fields;
 
     if (!title || !title.length) {
       return res.status(400).json({
@@ -33,6 +33,18 @@ exports.create = (req, res) => {
       });
     }
 
+    if (!website) {
+      return res.status(400).json({
+        error: "website not present",
+      });
+    }
+    if (!imageUrl || !imageUrl.length) {
+      return res.status(400).json({
+        error: "imageUrl is too short",
+      });
+    }
+
+
     if (!categories || categories.length === 0) {
       return res.status(400).json({
         error: "At least one category is required",
@@ -44,6 +56,7 @@ exports.create = (req, res) => {
     caseStudies.title = title;
     caseStudies.body = body;
     caseStudies.website = website;
+    caseStudies.imageUrl = website;
 
     caseStudies.excerpt = smartTrim(body, 320, " ", " ...");
     caseStudies.slug = slugify(title).toLowerCase();
@@ -101,7 +114,7 @@ exports.list = (req, res) => {
     .skip(skip)
     .limit(limit)
     .select(
-      "_id title slug excerpt categories website postedBy createdAt updatedAt"
+      "_id title slug excerpt categories website postedBy imageUrl createdAt updatedAt"
     )
     .exec((err, data) => {
       if (err) {
@@ -127,7 +140,7 @@ exports.listAllBlogsCategoriesTags = (req, res) => {
     .skip(skip)
     .limit(limit)
     .select(
-      "_id title slug excerpt categories postedBy createdAt website updatedAt favoritesCount"
+      "_id title slug excerpt categories postedBy createdAt imageUrl website updatedAt favoritesCount"
     )
     .exec((err, data) => {
       if (err) {
@@ -161,7 +174,7 @@ exports.read = (req, res) => {
     .populate("categories", "_id name slug")
     .populate("postedBy", "_id name username")
     .select(
-      "_id title body slug mtitle mdesc categories postedBy createdAt updatedAt favoritesCount"
+      "_id title body slug mtitle mdesc categories postedBy createdAt imageUrl updatedAt favoritesCount"
     )
     .exec((err, data) => {
       if (err) {
@@ -270,7 +283,7 @@ exports.listRelated = (req, res) => {
   CaseStudies.find({ _id: { $ne: _id }, categories: { $in: categories } })
     .limit(limit)
     .populate("postedBy", "_id name username profile")
-    .select("title slug excerpt postedBy createdAt updatedAt favoritesCount")
+    .select("title slug excerpt postedBy createdAt updatedAt imageUrl favoritesCount")
     .exec((err, blogs) => {
       if (err) {
         return res.status(400).json({
@@ -316,7 +329,7 @@ exports.listByUser = (req, res) => {
     CaseStudies.find({ postedBy: userId })
       .populate("categories", "_id name slug")
       .populate("postedBy", "_id name username")
-      .select("_id title slug postedBy createdAt updatedAt favoritesCount")
+      .select("_id title slug postedBy createdAt updatedAt imageUrl favoritesCount")
       .exec((err, data) => {
         if (err) {
           return res.status(400).json({
