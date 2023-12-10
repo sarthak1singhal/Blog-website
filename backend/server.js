@@ -11,6 +11,7 @@ const userRoutes = require("./routes/user");
 const categoryRoutes = require("./routes/category");
 const tagRoutes = require("./routes/tag");
 const formRoutes = require("./routes/form");
+const portfolioRoutes = require("./routes/caseStudies");
 
 // App
 const app = express();
@@ -35,6 +36,7 @@ if (process.env.NODE_ENV == "development") {
 }
 // Routes MiddleWare
 app.use("/api", blogRoutes);
+app.use("/api", portfolioRoutes);
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);

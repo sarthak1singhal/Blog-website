@@ -19,7 +19,7 @@ exports.create = (req, res) => {
       });
     }
 
-    const { title, body, categories } = fields;
+    const { title, body, categories, website } = fields;
 
     if (!title || !title.length) {
       return res.status(400).json({
@@ -43,6 +43,8 @@ exports.create = (req, res) => {
     let caseStudies = new CaseStudies();
     caseStudies.title = title;
     caseStudies.body = body;
+    caseStudies.website = website;
+
     caseStudies.excerpt = smartTrim(body, 320, " ", " ...");
     caseStudies.slug = slugify(title).toLowerCase();
     caseStudies.mtitle = `${title} | ${process.env.APP_NAME}`;
@@ -79,18 +81,9 @@ exports.create = (req, res) => {
             error: errorHandler(err),
           });
         } else {
-          CaseStudies.findByIdAndUpdate(
-            result._id,
-            { new: true }
-          ).exec((err, result) => {
-            if (err) {
-              return res.status(400).json({
-                error: errorHandler(err),
-              });
-            } else {
-              res.json(result);
-            }
-          });
+          
+          res.json(result);
+
         }
       });
     });
@@ -98,13 +91,12 @@ exports.create = (req, res) => {
 };
 
 // list, listAllBlogsCategoriesTags, read, remove, update
-
 exports.list = (req, res) => {
   CaseStudies.find({})
     .populate("categories", "_id name slug")
     .populate("postedBy", "_id name username")
     .select(
-      "_id title slug excerpt categories postedBy createdAt updatedAt"
+      "_id title slug excerpt categories website postedBy createdAt updatedAt"
     )
     .exec((err, data) => {
       if (err) {
@@ -130,7 +122,7 @@ exports.listAllBlogsCategoriesTags = (req, res) => {
     .skip(skip)
     .limit(limit)
     .select(
-      "_id title slug excerpt categories postedBy createdAt updatedAt favoritesCount"
+      "_id title slug excerpt categories postedBy createdAt website updatedAt favoritesCount"
     )
     .exec((err, data) => {
       if (err) {
