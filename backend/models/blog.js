@@ -31,13 +31,11 @@ const blogSchema = new mongoose.Schema(
     imageUrl: {
       type: String,
     },
+    
     mdesc: {
       type: String,
     },
-    photo: {
-      data: Buffer,
-      contentType: String,
-    },
+  
     // categories: [{ type: ObjectId, ref: "Category", required: true }],
     tags: [{ type: ObjectId, ref: "Tag", required: true }],
     favoritesCount: {type: Number, default: 0},

@@ -31,12 +31,16 @@ const caseStudySchema = new mongoose.Schema(
     mdesc: {
       type: String,
     },
-    photo: {
-      data: Buffer,
-      contentType: String,
-    },
+   
     website: {
         type: String,    
+    },
+
+    imageUrl: {
+      type: String,
+    },
+    photoUrl: {
+      type: String,
     },
     categories: [{ type: ObjectId, ref: "Category", required: true }],
     // tags: [{ type: ObjectId, ref: "Tag", required: true }],

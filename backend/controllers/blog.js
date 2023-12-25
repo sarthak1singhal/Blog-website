@@ -22,7 +22,7 @@ exports.create = (req, res) => {
       });
     }
 
-    const { title, body, tags, imageUrl } = fields;
+    const { title, body, tags, imageUrl, logoUrl } = fields;
 
     if (!title || !title.length) {
       return res.status(400).json({
@@ -32,6 +32,11 @@ exports.create = (req, res) => {
     if (!imageUrl || !imageUrl.length) {
       return res.status(400).json({
         error: "imageUrl is required",
+      });
+    }    
+    if (!logoUrl || !logoUrl.length) {
+      return res.status(400).json({
+        error: "logoUrl is required",
       });
     }
     if (!body || body.length < 200) {
@@ -51,6 +56,7 @@ exports.create = (req, res) => {
     let blog = new Blog();
     blog.title = title;
     blog.body = body;
+
     blog.excerpt = smartTrim(body, 320, " ", " ...");
     blog.slug = slugify(title).toLowerCase();
     blog.mtitle = `${title} | ${process.env.APP_NAME}`;
@@ -61,15 +67,7 @@ exports.create = (req, res) => {
     // let arrayOfCategories = categories && categories.split(",");
     let arrayOfTags = tags && tags.split(",");
 
-    if (files.photo) {
-      if (files.photo.size > 10000000) {
-        return res.status(400).json({
-          error: "Image should be less then 1mb in size",
-        });
-      }
-      blog.photo.data = fs.readFileSync(files.photo.path);
-      blog.photo.contentType = files.photo.type;
-    }
+  
 
     blog.save((err, result) => {
       if (err) {
@@ -101,8 +99,12 @@ exports.create = (req, res) => {
 exports.list = (req, res) => {
   let limit = req.body.limit ? parseInt(req.body.limit) : 10;
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
-
-  Blog.find({})
+  let {tag} = req.body
+  let query = {}
+  if(tag){
+    query = { tags: { "$in" : [tag]} }
+  }
+  Blog.find(query)
     // .populate("categories", "_id name slug")
     .populate("tags", "_id name slug")
     .populate("postedBy", "_id name username")
@@ -173,6 +175,7 @@ exports.read = (req, res) => {
       "_id title body slug mtitle mdesc tags postedBy imageUrl createdAt updatedAt favoritesCount"
     )
     .exec((err, data) => {
+      console.log(data)
       if (err) {
         return res.json({
           error: errorHandler(err),

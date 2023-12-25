@@ -19,7 +19,7 @@ exports.create = (req, res) => {
       });
     }
 
-    const { title, body, categories, website, imageUrl } = fields;
+    const { title, body, categories, website, imageUrl, photoUrl } = fields;
 
     if (!title || !title.length) {
       return res.status(400).json({
@@ -43,6 +43,11 @@ exports.create = (req, res) => {
         error: "imageUrl is too short",
       });
     }
+    if (!photoUrl || !photoUrl.length) {
+      return res.status(400).json({
+        error: "imageUrl is too short",
+      });
+    }
 
 
     if (!categories || categories.length === 0) {
@@ -56,7 +61,8 @@ exports.create = (req, res) => {
     caseStudies.title = title;
     caseStudies.body = body;
     caseStudies.website = website;
-    caseStudies.imageUrl = website;
+    caseStudies.imageUrl = imageUrl;
+    caseStudies.photoUrl = photoUrl;
 
     caseStudies.excerpt = smartTrim(body, 320, " ", " ...");
     caseStudies.slug = slugify(title).toLowerCase();
@@ -66,15 +72,6 @@ exports.create = (req, res) => {
     // categories
     let arrayOfCategories = categories && categories.split(",");
 
-    if (files.photo) {
-      if (files.photo.size > 10000000) {
-        return res.status(400).json({
-          error: "Image should be less then 1mb in size",
-        });
-      }
-      caseStudies.photo.data = fs.readFileSync(files.photo.path);
-      caseStudies.photo.contentType = files.photo.type;
-    }
 
     caseStudies.save((err, result) => {
       if (err) {
@@ -114,7 +111,7 @@ exports.list = (req, res) => {
     .skip(skip)
     .limit(limit)
     .select(
-      "_id title slug excerpt categories website postedBy imageUrl createdAt updatedAt"
+      "_id title slug excerpt categories website postedBy imageUrl photoUrl createdAt updatedAt"
     )
     .exec((err, data) => {
       if (err) {
@@ -140,7 +137,7 @@ exports.listAllBlogsCategoriesTags = (req, res) => {
     .skip(skip)
     .limit(limit)
     .select(
-      "_id title slug excerpt categories postedBy createdAt imageUrl website updatedAt favoritesCount"
+      "_id title slug excerpt categories postedBy createdAt imageUrl photoUrl website updatedAt favoritesCount"
     )
     .exec((err, data) => {
       if (err) {
@@ -174,7 +171,7 @@ exports.read = (req, res) => {
     .populate("categories", "_id name slug")
     .populate("postedBy", "_id name username")
     .select(
-      "_id title body slug mtitle mdesc categories postedBy createdAt imageUrl updatedAt favoritesCount"
+      "_id title body slug mtitle mdesc categories postedBy createdAt photoUrl imageUrl updatedAt favoritesCount"
     )
     .exec((err, data) => {
       if (err) {
@@ -283,7 +280,7 @@ exports.listRelated = (req, res) => {
   CaseStudies.find({ _id: { $ne: _id }, categories: { $in: categories } })
     .limit(limit)
     .populate("postedBy", "_id name username profile")
-    .select("title slug excerpt postedBy createdAt updatedAt imageUrl favoritesCount")
+    .select("title slug excerpt postedBy createdAt updatedAt photoUrl imageUrl favoritesCount")
     .exec((err, blogs) => {
       if (err) {
         return res.status(400).json({
@@ -329,7 +326,7 @@ exports.listByUser = (req, res) => {
     CaseStudies.find({ postedBy: userId })
       .populate("categories", "_id name slug")
       .populate("postedBy", "_id name username")
-      .select("_id title slug postedBy createdAt updatedAt imageUrl favoritesCount")
+      .select("_id title slug postedBy createdAt updatedAt imageUrl imageUrl favoritesCount")
       .exec((err, data) => {
         if (err) {
           return res.status(400).json({
