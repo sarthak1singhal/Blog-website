@@ -39,7 +39,7 @@ const caseStudySchema = new mongoose.Schema(
     imageUrl: {
       type: String,
     },
-    photoUrl: {
+    logoUrl: {
       type: String,
     },
     categories: [{ type: ObjectId, ref: "Category", required: true }],
