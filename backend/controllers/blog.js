@@ -34,11 +34,11 @@ exports.create = (req, res) => {
         error: "imageUrl is required",
       });
     }    
-    if (!logoUrl || !logoUrl.length) {
-      return res.status(400).json({
-        error: "logoUrl is required",
-      });
-    }
+    // if (!logoUrl || !logoUrl.length) {
+    //   return res.status(400).json({
+    //     error: "logoUrl is required",
+    //   });
+    // }
     if (!body || body.length < 200) {
       return res.status(400).json({
         error: "Content is too short",
@@ -259,20 +259,20 @@ exports.update = (req, res) => {
   });
 };
 
-exports.photo = (req, res) => {
-  const slug = req.params.slug.toLowerCase();
-  Blog.findOne({ slug })
-    .select("photo")
-    .exec((err, blog) => {
-      if (err || !blog) {
-        return res.status(400).json({
-          error: errorHandler(err),
-        });
-      }
-      res.set("Content-type", blog.photo.contentType);
-      return res.send(blog.photo.data);
-    });
-};
+// exports.photo = (req, res) => {
+//   const slug = req.params.slug.toLowerCase();
+//   Blog.findOne({ slug })
+//     .select("photo")
+//     .exec((err, blog) => {
+//       if (err || !blog) {
+//         return res.status(400).json({
+//           error: errorHandler(err),
+//         });
+//       }
+//       res.set("Content-type", blog.photo.contentType);
+//       return res.send(blog.photo.data);
+//     });
+// };
 
 exports.listRelated = (req, res) => {
   // console.log(req.body.blog);

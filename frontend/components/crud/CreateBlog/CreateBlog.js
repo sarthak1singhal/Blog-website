@@ -36,11 +36,12 @@ const CreateBlog = ({ router }) => {
     success: "",
     formData: "",
     title: "",
+    imageUrl: "",
     hidePublishBtn: false,
   });
 
   const token = getCookie("token");
-  const { error, sizeError, success, formData, title, hidePublishBtn } = values;
+  const { error, sizeError, success, formData, title, hidePublishBtn, imageUrl } = values;
 
   // when the component mounts, formData is ready to use
   useEffect(() => {
@@ -193,6 +194,13 @@ const CreateBlog = ({ router }) => {
             onChange={handleChange("title")}
             required
           />
+          <FormInput
+            type="text"
+            value={imageUrl}
+            label="Image URL"
+            onChange={handleChange("imageUrl")}
+            required
+          />
           <div className="form-group">
             <ReactQuill
               modules={CreateBlog.modules}
@@ -213,17 +221,6 @@ const CreateBlog = ({ router }) => {
             <h5 className="create-blog__featured-image-title">
               Featured Image
             </h5>
-
-            <label className="create-blog__upload-img-btn">
-              Upload Image
-              <input
-                onChange={handleChange("photo")}
-                type="file"
-                accept="image/*"
-                hidden
-              />
-            </label>
-            <small className="create-blog__img-size-info">Max Size: 1MB</small>
           </div>
           <div>
             <div className="create-blog__categories">
@@ -235,6 +232,7 @@ const CreateBlog = ({ router }) => {
                       <input
                         onChange={handleCategoryToggleCheckbox(category._id)}
                         type="checkbox"
+                        
                       />
                       <label className="form-check-label">
                         {category.name}

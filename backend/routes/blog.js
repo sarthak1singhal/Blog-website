@@ -6,7 +6,7 @@ const {
   read,
   remove,
   update,
-  photo,
+  // photo,
   listRelated,
   listSearch,
   listByUser,
@@ -27,7 +27,7 @@ router.put("/blog/:slug", requireSignin, adminMiddleWare, update);
 
 
 router.get("/blogs", list);
-router.get("/blog/photo/:slug", photo);
+// router.get("/blog/photo/:slug", photo);
 router.post("/blogs/related", listRelated);
 router.get("/blogs/search", listSearch);
 router.get("/blog/:slug", read);
