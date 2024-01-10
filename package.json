@@ -1,0 +1,13 @@
+{
+  "name": "ventureup-blog-website",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">\r   <img width=\"200\" height=\"200\" src=\"images/blogLogo.png\">\r </p>",
+  "main": "index.js",
+  "scripts": {
+    "backend": "cd ./backend && npm run start",
+    "frontend": "cd ./frontend && set NODE_OPTIONS=--openssl-legacy-provider && npm run dev",
+    "start": "concurrently \"npm run backend\" \"npm run frontend\""
+  },
+  "author": "",
+  "license": "ISC"
+}
