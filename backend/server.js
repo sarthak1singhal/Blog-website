@@ -31,9 +31,22 @@ app.use(morgan("dev"));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cookieParser());
 // Cors
-if (process.env.NODE_ENV == "development") {
-  app.use(cors({ origin: `${process.env.CLIENT_URL}` }));
+const whitelist = [/http:\/\/localhost:[0-9]{4}/]
+const corsOptions = {
+    origin: function(origin, callback) {
+        if (whitelist.some((el) => origin.match(el)) || origin === undefined) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    },
+    credentials: true,
 }
+
+app.use('/api/health-check', (req, res) => {
+  return res.status(200).json({ success: true, message: '', data: null })
+})
+
 // Routes MiddleWare
 app.use("/api", blogRoutes);
 app.use("/api", portfolioRoutes);
