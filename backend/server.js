@@ -34,6 +34,7 @@ app.use(cookieParser());
 const whitelist = [/http:\/\/localhost:[0-9]{4}/]
 const corsOptions = {
     origin: function(origin, callback) {
+      console.log(origin)
         if (whitelist.some((el) => origin.match(el)) || origin === undefined) {
             callback(null, true)
         } else {
@@ -42,7 +43,7 @@ const corsOptions = {
     },
     credentials: true,
 }
-
+app.use(cors(corsOptions))
 app.use('/api/health-check', (req, res) => {
   return res.status(200).json({ success: true, message: '', data: null })
 })
