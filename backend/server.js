@@ -35,6 +35,8 @@ const whitelist = [/http:\/\/localhost:[0-9]{4}/]
 const corsOptions = {
     origin: function(origin, callback) {
       console.log(origin)
+      if(origin == "https://www.ventureup.in")             callback(null, true)
+
         if (whitelist.some((el) => origin.match(el)) || origin === undefined) {
             callback(null, true)
         } else {
