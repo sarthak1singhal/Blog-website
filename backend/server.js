@@ -30,22 +30,26 @@ mongoose
 app.use(morgan("dev"));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cookieParser());
-// Cors
-const whitelist = [/http:\/\/localhost:[0-9]{4}/]
-const corsOptions = {
-    origin: function(origin, callback) {
-      console.log(origin)
-      if(origin == "https://www.ventureup.in")             callback(null, true)
 
-        if (whitelist.some((el) => origin.match(el)) || origin === undefined) {
-            callback(null, true)
-        } else {
-            callback(new Error('Not allowed by CORS'))
-        }
-    },
-    credentials: true,
-}
-app.use(cors(corsOptions))
+// Cors
+var whitelist = ['http://localhost:3000', 'https://www.ventureup.in']; //white list consumers
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(null, false);
+    }
+  },
+  methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  credentials: true, //Credentials are cookies, authorization headers or TLS client certificates.
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'device-remember-token', 'Access-Control-Allow-Origin', 'Origin', 'Accept']
+};
+
+app.use(cors(corsOptions)); 
+
+
 app.use('/api/health-check', (req, res) => {
   return res.status(200).json({ success: true, message: '', data: null })
 })
