@@ -24,9 +24,7 @@ const CreateBlog = ({ router }) => {
     }
   };
 
-  const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
-  const [checkedCategories, setCheckedCategories] = useState([]);
   const [checkedTags, setCheckedTags] = useState([]);
 
   const [body, setBody] = useState(getBlogDataFromLocalStorage());
@@ -46,20 +44,8 @@ const CreateBlog = ({ router }) => {
   // when the component mounts, formData is ready to use
   useEffect(() => {
     setValues({ ...values, formData: new FormData() });
-    initCategories();
     initTags();
   }, [router]);
-
-  // initialize categories state
-  const initCategories = () => {
-    getCategories().then((data) => {
-      if (data.error) {
-        setValues({ ...values, error: data.error });
-      } else {
-        setCategories(data);
-      }
-    });
-  };
 
   // initialize tags state
   const initTags = () => {
@@ -70,29 +56,6 @@ const CreateBlog = ({ router }) => {
         setTags(data);
       }
     });
-  };
-
-  // add or remove checked categories from state
-  const handleCategoryToggleCheckbox = (categoryId) => () => {
-    setValues({ ...values, error: "" });
-
-    const allCheckedCategories = [...checkedCategories];
-
-    // get the index of current checked category
-    const checkedCategory = checkedCategories.indexOf(categoryId);
-
-    // if the current checked category is not in the state, add it
-    // else remove the category from the state
-    if (checkedCategory === -1) {
-      allCheckedCategories.push(categoryId);
-    } else {
-      allCheckedCategories.splice(checkedCategory, 1);
-    }
-
-    setCheckedCategories(allCheckedCategories);
-    formData.set("categories", allCheckedCategories);
-
-    console.log(allCheckedCategories);
   };
 
   // add or remove checked tags from state
@@ -131,7 +94,6 @@ const CreateBlog = ({ router }) => {
           success: `A new blog titled "${data.title}" was created`,
         });
         setBody("");
-        setCheckedCategories([]);
         setCheckedTags([]);
       }
     });
@@ -223,24 +185,6 @@ const CreateBlog = ({ router }) => {
             </h5>
           </div>
           <div>
-            <div className="create-blog__categories">
-              <h5 className="create-blog__categories-title">Categories</h5>
-              <ul style={{ maxHeight: "120px", overflowY: "scroll" }}>
-                {categories &&
-                  categories.map((category) => (
-                    <li key={category._id}>
-                      <input
-                        onChange={handleCategoryToggleCheckbox(category._id)}
-                        type="checkbox"
-                        
-                      />
-                      <label className="form-check-label">
-                        {category.name}
-                      </label>
-                    </li>
-                  ))}
-              </ul>
-            </div>
             <div className="create-blog__tags">
               <h5 className="create-blog__tags-title">Tags</h5>
               <ul style={{ maxHeight: "120px", overflowY: "scroll" }}>

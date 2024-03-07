@@ -28,6 +28,27 @@ const UserDashboard = () => {
             <a>Update / Delete Blogs</a>
           </Link>
         </li>
+        <li className="user-dashboard__list-group-item">
+          <img
+            className="user-dashboard__list-group-item__icon"
+            src="images/dashboard-icons/blog.svg"
+            alt=""
+          />
+          <Link href="/user/crud/caseStudy">
+            <a>Create CaseStudy</a>
+          </Link>
+        </li>
+
+        <li className="user-dashboard__list-group-item">
+          <img
+            className="user-dashboard__list-group-item__icon"
+            src="images/dashboard-icons/update.svg"
+            alt=""
+          />
+          <Link href="/user/crud/caseStudies">
+            <a>Update / Delete CaseStudy</a>
+          </Link>
+        </li>
 
         <li className="user-dashboard__list-group-item">
           <img
