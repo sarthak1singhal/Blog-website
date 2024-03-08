@@ -223,7 +223,24 @@ const CreateBlog = ({ router }) => {
             </h5>
           </div>
           <div>
-          
+            <div className="create-blog__categories">
+              <h5 className="create-blog__categories-title">Categories</h5>
+              <ul style={{ maxHeight: "120px", overflowY: "scroll" }}>
+                {categories &&
+                  categories.map((category) => (
+                    <li key={category._id}>
+                      <input
+                        onChange={handleCategoryToggleCheckbox(category._id)}
+                        type="checkbox"
+                        
+                      />
+                      <label className="form-check-label">
+                        {category.name}
+                      </label>
+                    </li>
+                  ))}
+              </ul>
+            </div>
             <div className="create-blog__tags">
               <h5 className="create-blog__tags-title">Tags</h5>
               <ul style={{ maxHeight: "120px", overflowY: "scroll" }}>

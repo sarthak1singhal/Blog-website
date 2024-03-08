@@ -59,6 +59,8 @@ export const signin = (user) => {
     body: JSON.stringify(user),
   })
     .then((response) => {
+
+      console.log(response)
       return response.json();
     })
     .catch((error) => console.log(error));

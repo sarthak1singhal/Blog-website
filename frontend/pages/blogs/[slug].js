@@ -54,11 +54,11 @@ const BlogPage = ({ blog, query }) => {
           <meta property="og:site_name" content={`${APP_NAME}`} />
           <meta
             property="og:image"
-            content={`${API}/blog/photo/${blog.slug}`}
+            content={blog.imageUrl}
           />{" "}
           <meta
             property="og:image:secure_url"
-            content={`${API}/blog/photo/${blog.slug}`}
+            content={blog.imageUrl}
           />{" "}
           <meta property="og:image:type" content="/image/jpg" />
           <meta property="fb:app_id" content={`${FB_APP_ID}`} />{" "}

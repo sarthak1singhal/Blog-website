@@ -8,7 +8,7 @@ const Blog = ({ blog, categories }) => {
     <article className="blog">
       <figure>
         <img
-          src={`${API}/blog/photo/${blog.slug}`}
+          src={blog.imageUrl}
           alt={blog.title}
           className="blog__banner-img"
         />

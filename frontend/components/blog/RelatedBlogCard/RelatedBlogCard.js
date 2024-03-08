@@ -9,7 +9,7 @@ const RelatedBlogCard = ({ blog }) => {
         <a>
           <img
             className="related-blog-card__img"
-            src={`${API}/blog/photo/${blog.slug}`}
+            src={blog.imageUrl}
             alt={blog.title}
           />{" "}
         </a>

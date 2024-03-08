@@ -14,7 +14,7 @@ const AdminDashboard = () => {
             alt=""
           />
           <Link href="/admin/crud/category-tag">
-            <a>Create Categories</a>
+            <a>Create Categories: Case studies</a>
           </Link>
         </li>
         <li className="admin-dashboard__list-group-item">
@@ -24,7 +24,7 @@ const AdminDashboard = () => {
             alt=""
           />
           <Link href="/admin/crud/category-tag">
-            <a>Create Tags</a>
+            <a>Create Tags: Blogs</a>
           </Link>
         </li>
 

@@ -220,7 +220,7 @@ const UpdateBlog = ({ router }) => {
           {body && (
             <img
               className="update-blog__img"
-              src={`${API}/blog/photo/${slug}`}
+              src={blog.imageUrl}
               alt={title}
             />
           )}
