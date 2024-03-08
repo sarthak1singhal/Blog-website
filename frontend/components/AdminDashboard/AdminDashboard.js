@@ -49,6 +49,27 @@ const AdminDashboard = () => {
             <a>Update / Delete Blogs</a>
           </Link>
         </li>
+        <li className="admin-dashboard__list-group-item">
+          <img
+            className="admin-dashboard__list-group-item__icon"
+            src="images/dashboard-icons/blog.svg"
+            alt=""
+          />
+          <Link href="/admin/crud/caseStudy">
+            <a>Create Case Study</a>
+          </Link>
+        </li>
+
+        <li className="admin-dashboard__list-group-item">
+          <img
+            className="admin-dashboard__list-group-item__icon"
+            src="images/dashboard-icons/update.svg"
+            alt=""
+          />
+          <Link href="/admin/crud/caseStudies">
+            <a>Update / Delete Case Studies</a>
+          </Link>
+        </li>
 
         <li className="admin-dashboard__list-group-item">
           <img

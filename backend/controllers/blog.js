@@ -111,7 +111,7 @@ exports.list = (req, res) => {
     .skip(skip)
     .limit(limit)
     .select(
-      "_id title slug excerpt tags postedBy imageUrl createdAt updatedAt"
+      "_id title slug excerpt tags postedBy imageUrl createdAt updatedAt mdesc"
     )
     .exec((err, data) => {
       if (err) {

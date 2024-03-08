@@ -111,7 +111,7 @@ exports.list = (req, res) => {
     .skip(skip)
     .limit(limit)
     .select(
-      "_id title slug excerpt categories website postedBy imageUrl logoUrl createdAt updatedAt"
+      "_id title slug excerpt categories website mdesc postedBy imageUrl logoUrl createdAt updatedAt"
     )
     .exec((err, data) => {
       if (err) {
@@ -171,7 +171,7 @@ exports.read = (req, res) => {
     .populate("categories", "_id name slug")
     .populate("postedBy", "_id name username")
     .select(
-      "_id title body slug mtitle mdesc categories postedBy createdAt logoUrl imageUrl updatedAt favoritesCount"
+      "_id title body slug mtitle website mdesc categories postedBy createdAt logoUrl imageUrl updatedAt favoritesCount"
     )
     .exec((err, data) => {
       if (err) {

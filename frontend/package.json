@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node --openssl-legacy-provider ./node_modules/.bin/next dev",    
+    "dev": "node --openssl-legacy-provider ./node_modules/.bin/next dev",
+
     "build": "next build",
     "start": "next start -p 3000"
   },
