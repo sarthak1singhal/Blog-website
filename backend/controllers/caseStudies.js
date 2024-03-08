@@ -66,7 +66,7 @@ exports.create = (req, res) => {
 
     caseStudies.excerpt = smartTrim(body, 320, " ", " ...");
     caseStudies.slug = slugify(title).toLowerCase();
-    caseStudies.mtitle = `${title} | ${process.env.APP_NAME}`;
+    caseStudies.mtitle = `${title} | VentureUp`;
     caseStudies.mdesc = stripHtml(body.substring(0, 160)).result;
     caseStudies.postedBy = req.user._id;
     // categories
