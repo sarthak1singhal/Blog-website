@@ -108,8 +108,8 @@ exports.list = (req, res) => {
   CaseStudies.find({})
     .populate("categories", "_id name slug")
     .populate("postedBy", "_id name username")
-    .skip(skip)
-    .limit(limit)
+    .skip((Number.parseInt(req.query.perPage)*(Number.parseInt(req.query.pageNo)-1)))
+    .limit(Number.parseInt(req.query.perPage))
     .select(
       "_id title slug excerpt categories website mdesc postedBy imageUrl logoUrl createdAt updatedAt"
     )
