@@ -22,7 +22,7 @@ exports.create = (req, res) => {
       });
     }
 
-    const { title, body, tags, imageUrl, logoUrl } = fields;
+    const { title, body, tags, imageUrl, logoUrl, mdesc } = fields;
 
     if (!title || !title.length) {
       return res.status(400).json({
@@ -60,7 +60,8 @@ exports.create = (req, res) => {
     blog.excerpt = smartTrim(body, 320, " ", " ...");
     blog.slug = slugify(title).toLowerCase();
     blog.mtitle = `${title} | VentureUp`;
-    blog.mdesc = stripHtml(body.substring(0, 160)).result;
+    blog.mdesc = mdesc
+    // stripHtml(body.substring(0, 160)).result;
     blog.postedBy = req.user._id;
     blog.imageUrl = imageUrl
     // categories and tags

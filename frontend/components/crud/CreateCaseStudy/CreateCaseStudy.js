@@ -70,11 +70,12 @@ const CreateCaseStudy = ({ router }) => {
         imageUrl: "",
         logoUrl: "",
         website: "",
+        mdesc: "",
         hidePublishBtn: false,
       });
     
       const token = getCookie("token");
-      const { error, sizeError, success, formData, title, hidePublishBtn, imageUrl, logoUrl, website } = values;
+      const { error, sizeError, success, formData, title, hidePublishBtn, imageUrl, logoUrl, website, mdesc } = values;
 
       const handleCategoryToggleCheckbox = (categoryId) => () => {
         setValues({ ...values, error: "" });
@@ -178,6 +179,13 @@ const CreateCaseStudy = ({ router }) => {
                 value={website}
                 label="Website URL"
                 onChange={handleChange("website")}
+                required
+              />
+              <FormInput
+                type="text"
+                value={mdesc}
+                label="mdesc"
+                onChange={handleChange("mdesc")}
                 required
               />
               <div className="form-group">

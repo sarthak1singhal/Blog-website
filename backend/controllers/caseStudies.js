@@ -19,7 +19,7 @@ exports.create = (req, res) => {
       });
     }
 
-    const { title, body, categories, website, imageUrl, logoUrl } = fields;
+    const { title, body, categories, website, imageUrl, logoUrl, mdesc } = fields;
 
     if (!title || !title.length) {
       return res.status(400).json({
@@ -67,7 +67,8 @@ exports.create = (req, res) => {
     caseStudies.excerpt = smartTrim(body, 320, " ", " ...");
     caseStudies.slug = slugify(title).toLowerCase();
     caseStudies.mtitle = `${title} | VentureUp`;
-    caseStudies.mdesc = stripHtml(body.substring(0, 160)).result;
+    caseStudies.mdesc = mdesc
+    // stripHtml(body.substring(0, 160)).result;
     caseStudies.postedBy = req.user._id;
     // categories
     let arrayOfCategories = categories && categories.split(",");

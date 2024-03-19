@@ -34,12 +34,22 @@ const CreateBlog = ({ router }) => {
     success: "",
     formData: "",
     title: "",
+    mdesc: "",
     imageUrl: "",
     hidePublishBtn: false,
   });
 
   const token = getCookie("token");
-  const { error, sizeError, success, formData, title, hidePublishBtn, imageUrl } = values;
+  const {
+    error,
+    sizeError,
+    success,
+    formData,
+    title,
+    hidePublishBtn,
+    imageUrl,
+    mdesc,
+  } = values;
 
   // when the component mounts, formData is ready to use
   useEffect(() => {
@@ -161,6 +171,13 @@ const CreateBlog = ({ router }) => {
             value={imageUrl}
             label="Image URL"
             onChange={handleChange("imageUrl")}
+            required
+          />
+          <FormInput
+            type="text"
+            value={mdesc}
+            label="mdesc"
+            onChange={handleChange("mdesc")}
             required
           />
           <div className="form-group">
