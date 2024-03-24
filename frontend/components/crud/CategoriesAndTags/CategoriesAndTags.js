@@ -1,4 +1,5 @@
 import Categories from "../Categories/Categories";
+import FundRaisingCategories from "../FundRaisingCategories/FundRaisingCategories";
 import Tags from "../Tags/Tags";
 
 const CategoriesAndTags = () => {
@@ -12,6 +13,7 @@ const CategoriesAndTags = () => {
       <div className="categories-and-tags__wrapper">
         <Categories />
         <Tags />
+        <FundRaisingCategories />
       </div>
     </div>
   );

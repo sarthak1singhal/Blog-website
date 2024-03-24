@@ -10,7 +10,9 @@ const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const categoryRoutes = require("./routes/category");
 const tagRoutes = require("./routes/tag");
+const fundingTagRoutes = require("./routes/funding-tags");
 const formRoutes = require("./routes/form");
+const startRaisingRoutes = require("./routes/startRaising");
 const portfolioRoutes = require("./routes/caseStudies");
 
 // App
@@ -61,7 +63,9 @@ app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", tagRoutes);
+app.use("/api", fundingTagRoutes);
 app.use("/api", formRoutes);
+app.use("/api", startRaisingRoutes);
 
 // Port
 const port = process.env.PORT || 8000;

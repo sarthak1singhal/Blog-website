@@ -74,6 +74,28 @@ const AdminDashboard = () => {
         <li className="admin-dashboard__list-group-item">
           <img
             className="admin-dashboard__list-group-item__icon"
+            src="images/dashboard-icons/blog.svg"
+            alt=""
+          />
+          <Link href="/admin/crud/fund-raising">
+            <a>Create Fund-Raising Blogs</a>
+          </Link>
+        </li>
+
+        <li className="admin-dashboard__list-group-item">
+          <img
+            className="admin-dashboard__list-group-item__icon"
+            src="images/dashboard-icons/update.svg"
+            alt=""
+          />
+          <Link href="/admin/crud/fund-raising-blogs">
+            <a>Update / Delete Fund-Raising Blogs</a>
+          </Link>
+        </li>
+
+        <li className="admin-dashboard__list-group-item">
+          <img
+            className="admin-dashboard__list-group-item__icon"
             src="images/dashboard-icons/edit.svg"
             alt=""
           />

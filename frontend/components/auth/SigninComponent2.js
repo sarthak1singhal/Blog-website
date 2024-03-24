@@ -29,6 +29,8 @@ const SigninComponent = () => {
     const userData = { email, password };
 
     signin(userData).then((data) => {
+      console.log(data)
+
       if (data.error) {
         setValues({ ...values, error: data.error, loading: false });
       } else {
