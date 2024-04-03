@@ -23,8 +23,9 @@ exports.create = (req, res) => {
         error: "File could not upload",
       });
     }
-
-    const { title, body, tags, fileUrl, logoUrl, mdesc } = fields;
+    
+    const { title, body, tags, fileUrl, imageUrl, logoUrl, mdesc } = fields;
+    console.log(title, imageUrl, fileUrl, mdesc, logoUrl)
 
     if (!title || !title.length) {
       return res.status(400).json({
@@ -66,6 +67,7 @@ exports.create = (req, res) => {
     // stripHtml(body.substring(0, 160)).result;
     blog.postedBy = req.user._id;
     blog.fileUrl = fileUrl
+    blog.imageUrl = imageUrl
     // categories and tags
     // let arrayOfCategories = categories && categories.split(",");
     let arrayOfTags = tags && tags.split(",");
@@ -202,10 +204,10 @@ exports.read = (req, res) => {
     .populate("tags", "_id name slug")
     .populate("postedBy", "_id name username")
     .select(
-      "_id title body slug mtitle mdesc tags postedBy fileUrl createdAt updatedAt favoritesCount"
+      "_id title body slug mtitle imageUrl mdesc tags postedBy fileUrl createdAt updatedAt favoritesCount"
     )
     .exec((err, data) => {
-      console.log(data)
+      console.log("meow",data)
       if (err) {
         return res.json({
           error: errorHandler(err),
@@ -374,13 +376,14 @@ exports.listByUser = (req, res) => {
 
 
 exports.createUserFormData = (req, res) => {
-  const { email, company, phone } = req.body;
+  const { name, company, phone, types } = req.body;
 
   // Create a new instance of your Mongoose model
   const formdata = new FormDataModel({
-      email,
+      name,
       company,
-      phone
+      phone,
+      types,
   });
 
   // Save the data to the database
