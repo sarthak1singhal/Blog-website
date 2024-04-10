@@ -35,7 +35,9 @@ const raiseFundingSchema = new mongoose.Schema(
     mdesc: {
       type: String,
     },
-
+    imageUrl: {
+      type: String,
+    },
     // categories: [{ type: ObjectId, ref: "Category", required: true }],
     tags: [{ type: ObjectId, ref: "Tag", required: true }],
     favoritesCount: {type: Number, default: 0},

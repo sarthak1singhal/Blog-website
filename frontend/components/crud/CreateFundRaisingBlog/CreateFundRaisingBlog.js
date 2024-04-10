@@ -36,6 +36,7 @@ const CreateFundRaisingBlog = ({ router }) => {
     title: "",
     mdesc: "",
     fileUrl: "",
+    imageUrl: "",
     hidePublishBtn: false,
   });
 
@@ -49,6 +50,7 @@ const CreateFundRaisingBlog = ({ router }) => {
     hidePublishBtn,
     fileUrl,
     mdesc,
+    imageUrl,
   } = values;
 
   // when the component mounts, formData is ready to use
@@ -93,6 +95,7 @@ const CreateFundRaisingBlog = ({ router }) => {
 
   const publishBlog = (e) => {
     e.preventDefault();
+    console.log(formData)
     createBlog(formData, token).then((data) => {
       if (data.error) {
         setValues({ ...values, error: data.error });
@@ -178,6 +181,13 @@ const CreateFundRaisingBlog = ({ router }) => {
             value={mdesc}
             label="mdesc"
             onChange={handleChange("mdesc")}
+            required
+          />
+          <FormInput
+            type="text"
+            value={imageUrl}
+            label="imageUrl"
+            onChange={handleChange("imageUrl")}
             required
           />
           <div className="form-group">
