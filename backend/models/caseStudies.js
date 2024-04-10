@@ -49,6 +49,12 @@ const caseStudySchema = new mongoose.Schema(
       type: ObjectId,
       ref: "User",
     },
+    types:{
+     //case_study, resource
+    },
+    file:{
+      //   filepath
+    }
   },
   { timestamps: true }
 );

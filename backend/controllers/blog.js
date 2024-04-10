@@ -98,6 +98,7 @@ exports.create = (req, res) => {
 // list, listAllBlogsCategoriesTags, read, remove, update
 
 exports.list = (req, res) => {
+  console.log(req.query)
   let limit = req.body.limit ? parseInt(req.body.limit) : 10;
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
   let {tag} = req.body
