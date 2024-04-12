@@ -34,7 +34,7 @@ app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cookieParser());
 
 // Cors
-var whitelist = ['http://localhost:3000', 'https://www.ventureup.in']; //white list consumers
+var whitelist = ['http://localhost:3000', 'https://app.baaten.in']; //white list consumers
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
