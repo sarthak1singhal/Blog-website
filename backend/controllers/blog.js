@@ -107,6 +107,7 @@ exports.list = (req, res) => {
     query = { tags: { "$in" : [tag]} }
   }
   Blog.find(query)
+    .sort({ createdAt: -1 })
     // .populate("categories", "_id name slug")
     .populate("tags", "_id name slug")
     .populate("postedBy", "_id name username")
